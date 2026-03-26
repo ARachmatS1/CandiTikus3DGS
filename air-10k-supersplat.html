@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Visualisasi Candi Tikus - SuperSplat</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* === 1. TEMA MAJAPAHIT === */
+        :root {
+            --royal-gold: #d4af37;
+            --majapahit-red: #800000;
+            --deep-brown: #2b1d16;
+            --soft-cream: #f9f7f2;
+        }
+
+        /* === 2. RESET & LAYOUT UTAMA === */
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; margin: 0; padding: 0; }
+        
+        body, html { 
+            height: 100%; width: 100%; 
+            overflow: hidden; 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--deep-brown);
+            display: flex; 
+            flex-direction: column; /* Menyusun elemen dari atas ke bawah */
+        }
+
+        /* === 3. HEADER NAVIGASI KHUSUS === */
+        .top-nav {
+            height: 65px;
+            background: #1a110d; /* Warna cokelat yang lebih gelap */
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+            z-index: 100;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            background: rgba(43, 29, 22, 0.9); 
+            color: var(--royal-gold);
+            padding: 10px 20px; 
+            border-radius: 6px; 
+            text-decoration: none; font-size: 13px; font-weight: 600; font-family: 'Cinzel', serif;
+            letter-spacing: 1px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: flex; align-items: center; gap: 8px;
+            transition: all 0.3s;
+        }
+        .btn-back:hover { 
+            background: var(--royal-gold); color: var(--deep-brown); 
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .viewer-title {
+            font-family: 'Cinzel', serif;
+            color: var(--royal-gold);
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* === 4. IFRAME (PETA 3D) === */
+        iframe { 
+            flex-grow: 1; /* Iframe akan mengisi seluruh sisa layar di bawah header */
+            width: 100%; 
+            border: none; display: block;
+            opacity: 0; transition: opacity 1.5s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .iframe-active { opacity: 1; }
+
+        /* === 5. LOADER TEMA MAJAPAHIT === */
+        #loader {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--deep-brown); z-index: 9999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.8s ease-out, visibility 0.8s;
+            padding: 20px;
+        }
+
+        .loader-title {
+            font-family: 'Cinzel', serif; 
+            font-size: clamp(2.5rem, 8vw, 3.5rem); 
+            color: var(--royal-gold);
+            letter-spacing: 6px; 
+            margin-bottom: 5px; text-align: center;
+            text-shadow: 0 4px 15px rgba(212, 175, 55, 0.2);
+            animation: pulseText 2s infinite; 
+        }
+
+        .loader-subtitle {
+            font-family: 'Cinzel', serif; font-size: clamp(1rem, 4vw, 1.2rem);
+            color: white; letter-spacing: 4px; margin-bottom: 20px; text-align: center;
+        }
+
+        .loader-platform {
+            background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3);
+            color: var(--royal-gold); padding: 6px 15px; border-radius: 20px;
+            font-size: 0.75rem; letter-spacing: 1.5px; margin-bottom: 25px;
+            display: flex; align-items: center; gap: 8px; font-weight: 600;
+        }
+
+        .loader-text { 
+            color: #aaa; font-size: 0.8rem; letter-spacing: 1.5px; 
+            text-transform: uppercase; text-align: center; line-height: 1.6;
+        }
+
+        .loader-line {
+            width: 0%; height: 2px; background: var(--royal-gold); margin-top: 25px;
+            animation: lineGrow 2.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            box-shadow: 0 0 10px var(--royal-gold);
+        }
+
+        @keyframes pulseText { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+        @keyframes lineGrow { 0% { width: 0; } 100% { width: 180px; } }
+
+        /* === 6. RESPONSIF HP === */
+        @media screen and (max-width: 768px) {
+            .top-nav { padding: 0 15px; height: 60px; }
+            .btn-text { display: none; } /* Sembunyikan teks KEMBALI di HP */
+            .btn-back { padding: 8px 12px; }
+            .viewer-title { font-size: 0.85rem; letter-spacing: 1px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader">
+        <div class="loader-title">CANDI TIKUS</div>
+        <div class="loader-subtitle">KONDISI TERGENANG</div>
+        <div class="loader-platform"><i class="fa-solid fa-cube"></i> SuperSplat</div>
+        <div class="loader-text">Memuat Detail Model 3DGS 10K Iterasi...</div>
+        <div class="loader-line"></div>
+    </div>
+
+    <div class="top-nav">
+        <a href="index.html" class="btn-back">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+            <span class="btn-text">KEMBALI KE BERANDA</span>
+        </a>
+        <div class="viewer-title">SUPERSPLAT VIEWER</div>
+    </div>
+
+    <iframe 
+        id="splatFrame"
+        src="https://superspl.at/scene/d0099512" 
+        allow="xr-spatial-tracking" 
+        allowfullscreen>
+    </iframe>
+
+    <script>
+        window.onload = function() {
+            const loader = document.getElementById('loader');
+            const frame = document.getElementById('splatFrame');
+
+            setTimeout(() => {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                frame.classList.add('iframe-active');
+            }, 2500); 
+        };
+    </script>
+
+</body>
+</html>
