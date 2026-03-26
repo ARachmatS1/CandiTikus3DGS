@@ -352,7 +352,13 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             animation: modalZoomIn 0.3s ease-out;
             border: 2px solid var(--royal-gold);
+            
+            /* TIGA BARIS DI BAWAH INI ADALAH TAMBAHANNYA */
+            max-height: 85vh; 
+            overflow-y: auto; 
+            scrollbar-width: none; 
         }
+        
         @keyframes modalZoomIn {
             from { transform: scale(0.8); opacity: 0; }
             to { transform: scale(1); opacity: 1; }
@@ -462,8 +468,13 @@
             .viewer-btn i { font-size: 2.5rem; }
 
             .iteration-item { flex-direction: column; align-items: flex-start; gap: 12px; }
-            .platform-links { width: 100%; display: grid; grid-template-columns: 1fr 1fr; }
-            .platform-btn { justify-content: center; }
+            .platform-links { 
+                width: 100%; 
+                display: flex; 
+                flex-direction: column; /* Membuat tombol bersusun vertikal */
+                gap: 10px; 
+            }
+            .platform-btn { justify-content: center; width: 100%; padding: 12px; }
 
             /* Penyesuaian Footer 3 Kolom untuk HP */
             .footer-container { flex-direction: column; gap: 40px; }
