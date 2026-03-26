@@ -25,10 +25,12 @@
         * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
         
         body {
+            max-width: 100%; 
+            overflow-x: hidden; 
             font-family: 'Inter', sans-serif;
             background-color: var(--soft-cream);
             color: var(--text-dark);
-            overflow-x: hidden; line-height: 1.6;
+            line-height: 1.6;
         }
 
         ::-webkit-scrollbar { width: 8px; }
@@ -446,8 +448,11 @@
         }
 
         /* ANIMASI */
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
-
+        @keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 
+            40% { transform: translateX(-50%) translateY(-10px); } 
+            60% { transform: translateX(-50%) translateY(-5px); }
+    }       
         /* MEDIA QUERY HP */
         @media screen and (max-width: 768px) {
             nav { padding: 15px 20px; }
