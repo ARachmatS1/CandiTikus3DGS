@@ -39,10 +39,35 @@
         ::-webkit-scrollbar-track { background: var(--deep-brown); }
         ::-webkit-scrollbar-thumb { background: var(--royal-gold); border-radius: 5px; }
 
+        /* MENGUNCI SCROLL SAAT LOADING SECARA ABSOLUT */
+        .no-scroll {
+            overflow: hidden !important;
+            height: 100vh !important;
+            touch-action: none;
+        }
+
+        /* AKSESIBILITAS: Efek Fokus untuk Navigasi Keyboard */
+        a:focus, button:focus, .clickable-img:focus {
+            outline: 3px solid var(--royal-gold);
+            outline-offset: 4px;
+        }
+
+        /* KELAS UTILITAS WARNA LATAR (Menggantikan Inline CSS) */
+        .bg-dark {
+            background-color: var(--deep-brown);
+            color: white;
+        }
+        .bg-dark .section-title {
+            color: white;
+        }
+        .bg-light {
+            background-color: white;
+        }
+
         /* === 3. LOADING SCREEN SINEMATIK === */
         #loader {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-color: #1a110d; /* Warna lebih gelap dari deep-brown agar dramatis */
+            background-color: #1a110d;
             z-index: 9999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
@@ -55,7 +80,6 @@
             letter-spacing: 8px; 
             text-align: center;
             padding: 0 15px;
-            /* Animasi Muncul dari Bawah */
             animation: fadeInReveal 1.5s ease-out forwards;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
@@ -91,7 +115,6 @@
             animation: loadingProgress 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* === ANIMASI BARU === */
         @keyframes fadeInReveal {
             0% { opacity: 0; transform: translateY(20px); filter: blur(5px); }
             100% { opacity: 1; transform: translateY(0); filter: blur(0); }
@@ -133,20 +156,19 @@
         }
 
         .combined-logo-img {
-            height: 45px; /* Tinggi standar agar terlihat jelas namun tetap rapi di navbar */
+            height: 45px;
             width: auto;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3)); /* Efek bayangan tipis agar logo 'muncul' */
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
             transition: transform 0.3s ease;
         }
 
         .combined-logo-img:hover {
-            transform: scale(1.05); /* Efek zoom halus saat disentuh */
+            transform: scale(1.05);
         }
 
-        /* Penyesuaian untuk layar HP */
         @media screen and (max-width: 768px) {
             .combined-logo-img {
-                height: 35px; /* Dikecilkan di HP agar tidak memenuhi layar */
+                height: 35px;
             }
         }
 
@@ -154,7 +176,6 @@
         header {
             height: 100vh; 
             position: relative;
-            /* Ubah linear-gradient agar lebih transparan di tengah */
             background: linear-gradient(
                         rgba(0, 0, 0, 0.6) 0%, 
                         rgba(26, 17, 13, 0.7) 50%, 
@@ -178,14 +199,14 @@
         }
        .hero-title {
             font-family: 'Cinzel', serif; 
-            font-size: clamp(3.5rem, 10vw, 6rem); /* Sedikit diperbesar */
+            font-size: clamp(3.5rem, 10vw, 6rem);
             background: linear-gradient(45deg, #bf953f, #fcf6ba, #b38728);
             -webkit-background-clip: text; 
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px; 
             font-weight: 900; 
             line-height: 1.1;
-            letter-spacing: 12px; /* Ditambah biar mewah */
+            letter-spacing: 12px;
             text-shadow: 0 15px 35px rgba(0,0,0,0.5);
         }
         .hero-desc { 
@@ -201,7 +222,7 @@
             font-size: 2.5rem;
             animation: bounce 2s infinite; 
             cursor: pointer;
-            filter: drop-shadow(0 0 15px rgba(0,0,0,0.8)); /* Bayangan lebih gelap agar kontras */
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.8));
         }
 
         /* === 6. LAYOUT SECTION === */
@@ -263,7 +284,7 @@
             backdrop-filter: blur(5px);
         }
         
-        /* === 8. METODE 3DGS === */
+        /* === 8. METODE === */
         .method-content {
             max-width: 800px; margin: 0 auto; text-align: justify; 
             color: #ddd; font-size: 1.1rem; line-height: 1.8;
@@ -278,7 +299,56 @@
         }
         .method-highlight p { margin-bottom: 0; color: #f3e5ab; font-style: italic; }
 
-        /* === 9. HASIL PENELITIAN === */
+        /* === 9. HASIL PENELITIAN & PEMISAH KONDISI === */
+        .condition-divider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 70px auto 40px;
+            max-width: 900px;
+        }
+        .condition-line {
+            flex-grow: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
+        }
+        .condition-badge {
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 0 20px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+            border: 2px solid;
+            background: white;
+            transition: transform 0.3s ease;
+        }
+        .condition-badge:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Varian Kering */
+        .badge-theme-kering {
+            color: #8b5a2b;
+            border-color: var(--royal-gold);
+            background: linear-gradient(145deg, #ffffff, #fdfbf5);
+        }
+        .badge-theme-kering i { color: var(--royal-gold); font-size: 1.1rem; }
+
+        /* Varian Air */
+        .badge-theme-air {
+            color: #008080;
+            border-color: #00bfff;
+            background: linear-gradient(145deg, #ffffff, #f2fbff);
+        }
+        .badge-theme-air i { color: #00bfff; font-size: 1.1rem; }
+
         .compare-grid { 
             display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; 
             max-width: 1000px; margin: 0 auto;
@@ -321,7 +391,7 @@
             font-family: 'Cinzel', serif; 
             transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 15px;
             cursor: pointer; width: 100%; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Tambahan bayangan lembut */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
         }
         .viewer-btn i { font-size: 3rem; transition: 0.3s; }
         .viewer-btn span { font-size: 1.1rem; letter-spacing: 1px; font-family: 'Inter'; font-weight: 600; }
@@ -331,17 +401,35 @@
             box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
         }
 
-        /* Warna Khusus Tombol Kering */
+        /* Warna Khusus Tombol 3DGS Kering */
         .btn-kering { color: var(--royal-gold); border: 2px solid rgba(212, 175, 55, 0.3); }
         .btn-kering:hover { background: #fffdf5; border-color: var(--royal-gold); }
         .btn-kering:hover i { transform: scale(1.1); color: var(--royal-gold); }
 
-        /* Warna Khusus Tombol Tergenang */
+        /* Warna Khusus Tombol 3DGS Tergenang */
         .btn-air { color: #00bfff; border: 2px solid rgba(0, 191, 255, 0.3); }
         .btn-air:hover { background: #f0fbff; border-color: #00bfff; }
         .btn-air:hover i { transform: scale(1.1); color: #00bfff; }
 
-        /* === 11. MODAL POP-UP ITERASI === */
+        /* Warna Khusus Tombol SfM Kering */
+        .btn-sfm-kering { color: #8b5a2b; border: 2px solid rgba(139, 90, 43, 0.3); }
+        .btn-sfm-kering:hover { background: #fdfaf7; border-color: #8b5a2b; }
+        .btn-sfm-kering:hover i { transform: scale(1.1); color: #8b5a2b; }
+
+        /* Warna Khusus Tombol SfM Tergenang */
+        .btn-sfm-air { color: #008080; border: 2px solid rgba(0, 128, 128, 0.3); }
+        .btn-sfm-air:hover { background: #f2fafa; border-color: #008080; }
+        .btn-sfm-air:hover i { transform: scale(1.1); color: #008080; }
+
+        /* Memaksa grid menjadi 2 kolom di desktop untuk 4 tombol */
+        @media screen and (min-width: 769px) {
+            .viewer-grid {
+                grid-template-columns: repeat(2, 1fr);
+                max-width: 900px;
+            }
+        }
+
+        /* === 11. MODAL POP-UP ITERASI (HANYA UNTUK 3DGS) === */
         .custom-modal {
             display: none; position: fixed; z-index: 2000; left: 0; top: 0;
             width: 100%; height: 100%; overflow: auto;
@@ -356,8 +444,6 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             animation: modalZoomIn 0.3s ease-out;
             border: 2px solid var(--royal-gold);
-            
-            /* TIGA BARIS DI BAWAH INI ADALAH TAMBAHANNYA */
             max-height: 85vh; 
             overflow-y: auto; 
             scrollbar-width: none; 
@@ -431,10 +517,7 @@
         .footer-info-group.dosbing p { font-size: 0.9rem; color: #ccc; line-height: 1.8; }
 
         .social-icons { 
-            display: flex; 
-            justify-content: center; /* Ini kunci agar ikon benar-benar di tengah */
-            gap: 15px; 
-            margin-top: 15px; 
+            display: flex; justify-content: center; gap: 15px; margin-top: 15px; 
         }
         .social-link {
             width: 40px; height: 40px; border: 1px solid rgba(255,255,255,0.2); border-radius: 50%;
@@ -454,7 +537,7 @@
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); } 
             40% { transform: translateX(-50%) translateY(-10px); } 
             60% { transform: translateX(-50%) translateY(-5px); }
-    }       
+        }       
         /* MEDIA QUERY HP */
         @media screen and (max-width: 768px) {
             nav { padding: 15px 20px; }
@@ -474,24 +557,61 @@
             .viewer-btn { padding: 25px 20px; }
             .viewer-btn i { font-size: 2.5rem; }
 
+            .condition-divider { margin: 50px auto 30px; }
+            .condition-badge { padding: 8px 20px; font-size: 1rem; letter-spacing: 2px; }
+
             .iteration-item { flex-direction: column; align-items: flex-start; gap: 12px; }
             .platform-links { 
-                width: 100%; 
-                display: flex; 
-                flex-direction: column; /* Membuat tombol bersusun vertikal */
-                gap: 10px; 
+                width: 100%; display: flex; flex-direction: column; gap: 10px; 
             }
             .platform-btn { justify-content: center; width: 100%; padding: 12px; }
 
-            /* Penyesuaian Footer 3 Kolom untuk HP */
             .footer-container { flex-direction: column; gap: 40px; }
             .footer-col, .footer-col.center, .footer-col.right { 
                 align-items: flex-start; text-align: left; width: 100%; 
             }
         }
+
+        /* === EFEK KLIK GAMBAR & MODAL LIGHTBOX === */
+        .clickable-img {
+            cursor: pointer;
+            transition: 0.5s;
+        }
+        .clickable-img:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        #image-modal {
+            flex-direction: column;
+        }
+
+        .modal-img-content {
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+            border: 3px solid var(--royal-gold);
+            animation: modalZoomIn 0.3s ease-out;
+            object-fit: contain;
+        }
+
+        #img-caption {
+            color: white;
+            text-align: center;
+            margin-top: 15px;
+            font-family: 'Cinzel', serif;
+            font-size: 1.2rem;
+            letter-spacing: 2px;
+            animation: modalZoomIn 0.4s ease-out;
+        }
     </style>
 </head>
 <body>
+    <script>
+        document.documentElement.classList.add('no-scroll');
+        document.body.classList.add('no-scroll');
+    </script>
 
     <div id="loader">
         <div class="loader-logo">CANDI TIKUS</div>
@@ -506,8 +626,8 @@
         <div class="nav-links">
             <a href="#about">Latar Belakang</a>
             <a href="#methodology">Metode</a>
-            <a href="#analysis">Visualisasi Model</a>
-            <a href="#exploration">Eksplorasi 3D</a>
+            <a href="#analysis">Hasil Penelitian</a>
+            <a href="#exploration">Model 3D</a>
         </div>
         <div class="institution-wrapper">
         <a href="https://www.its.ac.id/tgeomatika/id/beranda/" target="_blank" title="Kunjungi Website Teknik Geomatika ITS">
@@ -522,106 +642,157 @@
         <div class="hero-desc" data-aos="fade-up" data-aos-delay="200">
             PEMODELAN 3D CANDI TIKUS MENGGUNAKAN FOTOGRAMETRI UAV DAN TERESTRIAL BERBASIS METODE GAUSSIAN SPLATTING.
         </div>
-        <a href="#about" class="scroll-icon"><i class="fa-solid fa-chevron-down"></i></a>
+        <a href="#about" class="scroll-icon" aria-label="Scroll ke bagian Latar Belakang"><i class="fa-solid fa-chevron-down"></i></a>
     </header>
 
-    <section id="about">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-tag">Latar Belakang</span>
-            <h2 class="section-title">Sang Petirtaan Agung</h2>
-            <div class="divider"></div>
-        </div>
+    <main>
+        <section id="about">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Latar Belakang</span>
+                <h2 class="section-title">Sang Petirtaan Agung</h2>
+                <div class="divider"></div>
+            </div>
 
-        <div class="about-container">
-            <div class="about-text-content" data-aos="fade-right" data-aos-delay="100">
-                <p>
-                    Candi Tikus merupakan peninggalan masa Kerajaan Majapahit yang berfungsi sebagai petirtaan, dengan struktur utama berupa kolam persegi dan bangunan candi bertingkat di bagian tengahnya. 
-                </p>
-                <br>
-                <p>
-                    Berbeda dengan candi pada umumnya yang bersifat vertikal, Candi Tikus memiliki bentuk cekung, dinding bertingkat, serta pola arsitektur simetris dengan elemen bata merah yang berulang. Dokumentasi bentuk asli candi ini menjadi krusial untuk menjaga kelestarian informasi geometris dan visualnya.
-                </p>
+            <div class="about-container">
+                <div class="about-text-content" data-aos="fade-right" data-aos-delay="100">
+                    <p>
+                        Candi Tikus merupakan peninggalan masa Kerajaan Majapahit yang berfungsi sebagai petirtaan, dengan struktur utama berupa kolam persegi dan bangunan candi bertingkat di bagian tengahnya. 
+                    </p>
+                    <br>
+                    <p>
+                        Berbeda dengan candi pada umumnya yang bersifat vertikal, Candi Tikus memiliki bentuk cekung, dinding bertingkat, serta pola arsitektur simetris dengan elemen bata merah yang berulang. Dokumentasi bentuk asli candi ini menjadi krusial untuk menjaga kelestarian informasi geometris dan visualnya.
+                    </p>
+                </div>
+                
+                <div class="about-image-wrapper" data-aos="fade-left" data-aos-delay="200">
+                    <img src="img/Candi_Tikus_1.jpeg" alt="Foto Asli Candi Tikus" loading="lazy">
+                    <div class="about-image-caption">Kondisi Eksisting Candi Tikus</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="methodology" class="bg-dark">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag" style="color: var(--royal-gold);">Metode Rekonstruksi</span>
+                <h2 class="section-title">3D Gaussian Splatting</h2>
+                <div class="divider"></div>
             </div>
             
-            <div class="about-image-wrapper" data-aos="fade-left" data-aos-delay="200">
-                <img src="img/Candi_Tikus_1.jpeg" alt="Foto Asli Candi Tikus">
-                <div class="about-image-caption">Kondisi Eksisting Candi Tikus</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="methodology" style="background: var(--deep-brown); color: white;">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-tag" style="color: var(--royal-gold);">Metode Rekonstruksi</span>
-            <h2 class="section-title" style="color: white;">3D Gaussian Splatting</h2>
-            <div class="divider"></div>
-        </div>
-        
-        <div class="method-content" data-aos="fade-up" data-aos-delay="100">
-            <p>
-                Metode Gaussian Splatting merupakan teknik representasi dan perenderan scene tiga dimensi yang memodelkan objek sebagai kumpulan Gaussian anisotropik di ruang 3D. Setiap Gaussian merepresentasikan posisi, bentuk, opasitas, dan warna lokal, sehingga scene dapat direkonstruksi secara kontinu tanpa memerlukan mesh eksplisit.
-            </p>
-            <div class="method-highlight">
+            <div class="method-content" data-aos="fade-up" data-aos-delay="100">
                 <p>
-                    <i class="fa-solid fa-lightbulb" style="margin-right: 10px;"></i> Dalam proses rendering, Gaussian 3D diproyeksikan ke bidang citra menjadi Gaussian 2D (splats) melalui parameter kamera, kemudian dikomposisikan menggunakan teknik alpha blending berdasarkan urutan kedalaman. (Kerbl dkk., 2023).
+                    Metode Gaussian Splatting merupakan teknik representasi dan perenderan scene tiga dimensi yang memodelkan objek sebagai kumpulan Gaussian anisotropik di ruang 3D. Setiap Gaussian merepresentasikan posisi, bentuk, opasitas, dan warna lokal, sehingga scene dapat direkonstruksi secara kontinu tanpa memerlukan mesh eksplisit.
+                </p>
+                <div class="method-highlight">
+                <p>
+                    <i class="fa-solid fa-code-compare" style="margin-right: 10px;"></i> 
+                    <strong>Mengapa membandingkan dengan SfM/MVS?</strong> Metode <em>Structure from Motion</em> (SfM) telah lama menjadi standar utama dalam fotogrametri. Namun, pendekatan berbasis <em>mesh</em> ini seringkali memiliki batasan saat merekonstruksi permukaan reflektif seperti genangan air atau detail mikromaterial. Penelitian ini menguji 3DGS untuk melihat kemampuannya dalam menutupi kelemahan tersebut, guna menghasilkan kualitas visual dan akurasi geometris yang lebih superior.
                 </p>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="analysis" style="background: white;">
-        <div class="section-header" data-aos="fade-up">
-            <span class="section-tag">Hasil Penelitian</span>
-            <h2 class="section-title">Visualisasi Model 3DGS</h2>
-            <div class="divider"></div>
-            <p>Visualisasi dari hasil rekonstruksi point cloud.</p>
-        </div>
+        <section id="analysis" class="bg-light">
+            <div class="section-header" data-aos="fade-up">
+                <span class="section-tag">Hasil Penelitian</span>
+                <h2 class="section-title">Visualisasi Model 3D</h2>
+                <div class="divider"></div>
+                <p>Hasil rekonstruksi pemodelan Candi Tikus berdasarkan metode yang digunakan.</p>
+            </div>
 
-        <div class="compare-grid" data-aos="fade-up">
-            <div class="comp-card">
-                <div class="badge badge-kering"><i class="fa-solid fa-sun"></i> Kondisi Kering</div>
-                <img src="img/kering-20k.png" class="comp-img" alt="3DGS Kering Resolusi Optimal">
-                <div class="comp-content">
-                    <h4>Resolusi Optimal</h4>
-                    <p>Permukaan lapuk bata dan pencahayaan global ter-render dengan resolusi tinggi.</p>
+            <div class="condition-divider" data-aos="fade-up">
+                <div class="condition-line"></div>
+                <div class="condition-badge" style="color: var(--deep-brown); border-color: var(--royal-gold);">
+                    <i class="fa-solid fa-cube" style="color: var(--royal-gold);"></i> 3D Gaussian Splatting (3DGS)
+                </div>
+                <div class="condition-line"></div>
+            </div>
+
+            <div class="compare-grid" data-aos="fade-up">
+                <div class="comp-card">
+                    <div class="badge" style="background: var(--royal-gold); color: white; border: 1px solid rgba(255,255,255,0.3);"><i class="fa-solid fa-sun"></i> Kering</div>
+                    <img src="img/kering-20k.png" class="comp-img clickable-img" alt="3DGS - Kondisi Kering (20K Iterasi)" loading="lazy" onclick="openImageModal(this.src, this.alt)" tabindex="0">
+                    <div class="comp-content">
+                        <h4>Resolusi Optimal (3DGS Kering)</h4>
+                        <p>Permukaan lapuk bata, detail warna, dan vegetasi ter-render dengan resolusi tinggi.</p>
+                    </div>
+                </div>
+
+                <div class="comp-card">
+                    <div class="badge" style="background: #00bfff; color: white; border: 1px solid rgba(255,255,255,0.3);"><i class="fa-solid fa-water"></i> Tergenang</div>
+                    <img src="img/air-20k.png" class="comp-img clickable-img" alt="3DGS - Kondisi Tergenang (20K Iterasi)" loading="lazy" onclick="openImageModal(this.src, this.alt)" tabindex="0">
+                    <div class="comp-content">
+                        <h4>Realitas Fotorealistik (3DGS Tergenang)</h4>
+                        <p>Mampu menangkap pantulan air dan gradasi warna lumut dengan tingkat realisme yang tinggi.</p>
+                    </div>
                 </div>
             </div>
 
-            <div class="comp-card">
-                <div class="badge badge-air"><i class="fa-solid fa-water"></i> Kondisi Tergenang</div>
-                <img src="img/air-20k.png" class="comp-img" alt="3DGS Air Realitas Fotorealistik">
-                <div class="comp-content">
-                    <h4>Realitas Fotorealistik</h4>
-                    <p>Gradasi warna lumut di bawah air dan pantulan arsitektur candi terlihat jelas dan dinamis.</p>
+            <div class="condition-divider" data-aos="fade-up" style="margin-top: 80px;">
+                <div class="condition-line"></div>
+                <div class="condition-badge" style="color: var(--deep-brown); border-color: #8b5a2b;">
+                    <i class="fa-solid fa-cubes" style="color: #8b5a2b;"></i> SfM/MVS        </div>
+                <div class="condition-line"></div>
+            </div>
+
+            <div class="compare-grid" data-aos="fade-up">
+                <div class="comp-card">
+                    <div class="badge" style="background: #8b5a2b; color: white; border: 1px solid rgba(255,255,255,0.3);"><i class="fa-solid fa-sun"></i> Kering</div>
+                    <img src="img/sfmkering.jpg" class="comp-img clickable-img" alt="SfM - Kondisi Kering" loading="lazy" onclick="openImageModal(this.src, this.alt)" tabindex="0">
+                    <div class="comp-content">
+                        <h4>Textured Mesh (SfM/MVS Kering)</h4>
+                        <p>Geometri dasar dengan tekstur terproyeksi. Pencahayaan global dan detail mikromaterial (seperti pori bata) seringkali tidak tertangkap optimal.</p>
+                    </div>
+                </div>
+
+                <div class="comp-card">
+                    <div class="badge" style="background: #008080; color: white; border: 1px solid rgba(255,255,255,0.3);"><i class="fa-solid fa-water"></i> Tergenang</div>
+                    <img src="img/sfmair.jpg" class="comp-img clickable-img" alt="SfM - Kondisi Tergenang" loading="lazy" onclick="openImageModal(this.src, this.alt)" tabindex="0">
+                    <div class="comp-content">
+                        <h4>Batasan Rekonstruksi (SfM/MVS Tergenang)</h4>
+                        <p>Sering mengalami kesulitan dalam merekonstruksi permukaan air karena sifat reflektif dan bias cahaya.</p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="exploration" style="background: var(--soft-cream);">
-        <div class="section-header" data-aos="zoom-in">
-            <span class="section-tag">Model 3D</span>
-            <h2 class="section-title">Eksplorasi Model 3DGS</h2>
-            <div class="divider"></div>
-            <p class="about-text" style="text-align: center;">Pilih skenario kondisi untuk memuat hasil dari masing-masing iterasi.</p>
-        </div>
+        <section id="exploration" style="background: var(--soft-cream);">
+            <div class="section-header" data-aos="zoom-in">
+                <span class="section-tag">Model 3D</span>
+                <h2 class="section-title">Eksplorasi Interaktif</h2>
+                <div class="divider"></div>
+                <p class="about-text" style="text-align: center;">Pilih metode rekonstruksi dan skenario kondisi untuk memuat hasil visualisasi.</p>
+            </div>
 
-        <div class="viewer-grid">
-            <button onclick="openModal('modal-iterasi-kering')" class="viewer-btn btn-kering">
-                <i class="fa-solid fa-sun"></i>
-                <span>Eksplorasi Kondisi Kering</span>
-            </button>
-            
-            <button onclick="openModal('modal-iterasi-air')" class="viewer-btn btn-air">
-                <i class="fa-solid fa-water"></i>
-                <span>Eksplorasi Kondisi Tergenang</span>
-            </button>
-        </div>
-    </section>
+            <div class="viewer-grid">
+                <button onclick="openModal('modal-iterasi-kering')" class="viewer-btn btn-kering">
+                    <i class="fa-solid fa-sun"></i>
+                    <span>3DGS - Kondisi Kering</span>
+                </button>
+                
+                <button onclick="openModal('modal-iterasi-air')" class="viewer-btn btn-air">
+                    <i class="fa-solid fa-water"></i>
+                    <span>3DGS - Kondisi Tergenang</span>
+                </button>
+
+                <a href="sfm-kering-tiled.html" target="_blank" class="viewer-btn btn-sfm-kering">
+                    <i class="fa-solid fa-sun" style="position: relative;">
+                        <i class="fa-solid fa-cubes" style="font-size: 1rem; position: absolute; bottom: -5px; right: -10px; color: inherit;"></i>
+                    </i>
+                    <span>SfM/MVS - Kondisi Kering</span>
+                </a>
+
+                <a href="sfm-air-tiled.html" target="_blank" class="viewer-btn btn-sfm-air">
+                    <i class="fa-solid fa-water" style="position: relative;">
+                        <i class="fa-solid fa-cubes" style="font-size: 1rem; position: absolute; bottom: -5px; right: -10px; color: inherit;"></i>
+                    </i>
+                    <span>SfM/MVS - Kondisi Tergenang</span>
+                </a>
+            </div>
+        </section>
+    </main>
 
     <div id="modal-iterasi-kering" class="custom-modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-iterasi-kering')"><i class="fa-solid fa-xmark"></i></span>
+            <button class="close-modal" onclick="closeModal('modal-iterasi-kering')" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-header">
                 <h3 class="modal-title">Model 3DGS - Kering</h3>
                 <p class="modal-desc">Pilih jumlah iterasi dan platform visualisasi.</p>
@@ -630,29 +801,29 @@
                 <div class="iteration-item">
                     <strong><i class="fa-solid fa-cube" style="font-size:0.9rem;"></i> 5K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="kering-5k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="kering-5k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="kering-5k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="kering-5k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
                 <div class="iteration-item">
                     <strong><i class="fa-solid fa-cube" style="font-size:0.9rem;"></i> 10K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="kering-10k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="kering-10k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="kering-10k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="kering-10k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
                 <div class="iteration-item">
                     <strong><i class="fa-solid fa-cube" style="font-size:0.9rem;"></i> 15K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="kering-15k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="kering-15k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="kering-15k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="kering-15k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
                 <div class="iteration-item">
                     <strong><i class="fa-solid fa-cube" style="font-size:0.9rem;"></i> 20K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="kering-20k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="kering-20k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="kering-20k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="kering-20k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
             </div>
@@ -661,7 +832,7 @@
 
     <div id="modal-iterasi-air" class="custom-modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeModal('modal-iterasi-air')"><i class="fa-solid fa-xmark"></i></span>
+            <button class="close-modal" onclick="closeModal('modal-iterasi-air')" aria-label="Tutup"><i class="fa-solid fa-xmark"></i></button>
             <div class="modal-header">
                 <h3 class="modal-title" style="color: #0088cc;">Model 3DGS - Tergenang</h3>
                 <p class="modal-desc">Pilih jumlah iterasi dan platform visualisasi.</p>
@@ -670,33 +841,41 @@
                 <div class="iteration-item">
                     <strong style="color: #0088cc;"><i class="fa-solid fa-water" style="font-size:0.9rem;"></i> 5K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="air-5k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="air-5k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="air-5k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="air-5k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
                 <div class="iteration-item">
                     <strong style="color: #0088cc;"><i class="fa-solid fa-water" style="font-size:0.9rem;"></i> 10K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="air-10k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="air-10k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="air-10k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="air-10k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
                 <div class="iteration-item">
                     <strong style="color: #0088cc;"><i class="fa-solid fa-water" style="font-size:0.9rem;"></i> 15K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="air-15k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="air-15k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="air-15k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="air-15k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
                 <div class="iteration-item">
                     <strong style="color: #0088cc;"><i class="fa-solid fa-water" style="font-size:0.9rem;"></i> 20K Iterasi</strong>
                     <div class="platform-links">
-                        <a href="air-20k-supersplat.html" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
-                        <a href="air-20k-cesium.html" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
+                        <a href="air-20k-supersplat.html" target="_blank" class="platform-btn btn-sp"><i class="fa-solid fa-cube"></i> SuperSplat</a>
+                        <a href="air-20k-cesium.html" target="_blank" class="platform-btn btn-cs"><i class="fa-solid fa-earth-asia"></i> Cesium ion</a>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+
+    <div id="image-modal" class="custom-modal" style="z-index: 3000;">
+        <span class="close-modal" onclick="closeImageModal()" style="color: white; font-size: 2rem; right: 30px; top: 20px;">
+            <i class="fa-solid fa-xmark"></i>
+        </span>
+        <img class="modal-img-content" id="expanded-img">
+        <div id="img-caption"></div>
     </div>
 
     <footer>
@@ -719,13 +898,13 @@
                     <p><strong>Abdullah Rachmat Sugi</strong><br>NRP. 5016221064</p>
                     
                     <div class="social-icons">
-                        <a href="mailto:rachmatsugi32@gmail.com" class="social-link" title="Email">
+                        <a href="mailto:rachmatsugi32@gmail.com" class="social-link" title="Email" aria-label="Email">
                             <i class="fa-solid fa-envelope"></i>
                         </a>
-                        <a href="https://www.instagram.com/rachmat.ars_" target="_blank" class="social-link" title="Instagram">
+                        <a href="https://www.instagram.com/rachmat.ars_" target="_blank" class="social-link" title="Instagram" aria-label="Instagram">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
-                        <a href="https://linkedin.com/in/rachmatsugi" target="_blank" class="social-link" title="LinkedIn">
+                        <a href="https://linkedin.com/in/rachmatsugi" target="_blank" class="social-link" title="LinkedIn" aria-label="LinkedIn">
                             <i class="fa-brands fa-linkedin-in"></i>
                         </a>
                     </div>
@@ -758,12 +937,16 @@
             offset: 100
         });
 
-        // Loading Screen Logic
+        // Loading Screen Logic dengan No-Scroll Removal
         window.addEventListener('load', () => {
             const loader = document.getElementById('loader');
             setTimeout(() => {
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
+                
+                // Membuka kembali kunci scroll di html dan body
+                document.documentElement.classList.remove('no-scroll');
+                document.body.classList.remove('no-scroll');
             }, 2000);
         });
 
@@ -779,7 +962,7 @@
             }
         });
 
-        // Modal (Pop-up) Logic
+        // Modal (Pop-up) Logic untuk Iterasi
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.style.display = "flex";
@@ -790,10 +973,39 @@
             modal.style.display = "none";
         }
 
-        // Tutup modal jika user klik di luar kotak
+        // --- Fungsi Pop-up Gambar (Lightbox) ---
+        function openImageModal(src, altText) {
+            const modal = document.getElementById('image-modal');
+            const img = document.getElementById('expanded-img');
+            const caption = document.getElementById('img-caption');
+            
+            modal.style.display = "flex";
+            img.src = src;
+            caption.innerHTML = altText;
+            document.body.classList.add('no-scroll'); // Mengunci scroll saat gambar dibuka
+        }
+
+        function closeImageModal() {
+            const modal = document.getElementById('image-modal');
+            modal.style.display = "none";
+            document.body.classList.remove('no-scroll'); // Membuka kunci scroll kembali
+        }
+
+        // Aksesibilitas: Tutup gambar saat menekan tombol Escape
+        document.addEventListener('keydown', function(event) {
+            if (event.key === "Escape") {
+                const imageModal = document.getElementById('image-modal');
+                if (imageModal.style.display === "flex") {
+                    closeImageModal();
+                }
+            }
+        });
+
+        // Tutup modal jika user klik di luar kotak (Berlaku untuk semua .custom-modal)
         window.onclick = function(event) {
             if (event.target.classList.contains('custom-modal')) {
                 event.target.style.display = "none";
+                document.body.classList.remove('no-scroll'); 
             }
         }
     </script>
